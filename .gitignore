@@ -1,11 +1,1 @@
-.old/
-*.log
-*.*db
-*.db
-log/
-.lastrun
-bin/*
-!bin/my*
-etc/*.yaml
-.env
-doc/ui
+.obsidian/workspace*.json
