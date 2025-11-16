@@ -1,0 +1,30 @@
+apiVersion: ""
+generated: "0001-01-01T00:00:00Z"
+repositories:
+- caFile: ""
+  certFile: ""
+  insecure_skip_tls_verify: false
+  keyFile: ""
+  name: bitnami
+  pass_credentials_all: false
+  password: ""
+  url: https://charts.bitnami.com/bitnami
+  username: ""
+- caFile: ""
+  certFile: ""
+  insecure_skip_tls_verify: false
+  keyFile: ""
+  name: aliyun
+  pass_credentials_all: false
+  password: ""
+  url: https://kubernetes.oss-cn-hangzhou.aliyuncs.com/charts
+  username: ""
+- caFile: ""
+  certFile: ""
+  insecure_skip_tls_verify: false
+  keyFile: ""
+  name: azurecn
+  pass_credentials_all: false
+  password: ""
+  url: https://mirror.azure.cn/kubernetes/charts
+  username: ""

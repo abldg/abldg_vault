@@ -1,0 +1,24 @@
+network:
+  version: 2
+  ethernets:
+    RV_IFN1: { dhcp4: no, optional: true, link-local: [] }
+    RV_IFN2: { dhcp4: no, optional: true, link-local: [] }
+  bonds:
+    RV_NAME:
+      dhcp4: no
+      dhcp6: no
+      parameters:
+        mode: active-backup
+        lacp-rate: fast
+        mii-monitor-interval: 100
+        transmit-hash-policy: layer2
+      interfaces:
+      - RV_IFN1
+      - RV_IFN2
+      addresses:
+      - RV_CUIP/24
+      routes:
+      - { metric: 100, to: 0.0.0.0/0, via: RV_CUGW }
+      nameservers:
+        search: []
+        addresses: [ 223.5.5.5, 114.114.114.114, 8.8.8.8 ]

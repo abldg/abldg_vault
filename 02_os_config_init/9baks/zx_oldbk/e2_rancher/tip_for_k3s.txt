@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+shf_outter() {
+  xfn_tipinfo() {
+    local finst='bash /opt/install.sh' prefx='  '
+    local cnk3s='https://rancher-mirror.rancher.cn/k3s/k3s-install.sh'
+    echo "$SPL ${TH} $SPL"
+    printf "\n- [OFFLINE] (after of [k3s_offline_pack.bin] runs)\n"
+    printf "${prefx}export INSTALL_K3S_SKIP_DOWNLOAD=true ${*}; ${finst}\n"
+    printf "\n- [ONLINE] (under osci git work dir)\n"
+    printf "${prefx}make extmod/k3s_inst_online vx=1 ${*}\n"
+    printf "\n- [ONLINE] (via ${cnk3s##*/})\n"
+    printf "${prefx}curl -4fsSL ${cnk3s} | INSTALL_K3S_MIRROR=cn ${*} bash -\n"
+    echo
+  }
+  ##////////////////////////////////////////////////////////////////////////////
+  TH=install_k3s_server xfn_tipinfo
+  ##////////////////////////////////////////////////////////////////////////////
+  set -- K3S_URL=https://K3S_SVR_IP:6443 K3S_TOKEN=K3S_SVR_TOKEN_xxx
+  if [ -e ${tknfile:="/var/lib/rancher/k3s/server/token"} ]; then
+    set -- K3S_URL=https://$(hostname):6443 K3S_TOKEN=$(cut -d: -f4 $tknfile)
+  fi
+  TH=install_k3s_agent xfn_tipinfo $@
+}
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+shf_untgzwkld() {
+  ##////////////////////////////////////////////////////////////////////////////
+  local tmptgz=$(mktemp -u -t k3soffline_XXXXXX.tar.gz)
+  local bgnwld=$(awk "/^exit 0 #@#MARKER#@#$/{print NR+1}" $0)
+  tail -n +$bgnwld $0 | sed s@^#DL#@@ | base64 -d >$tmptgz
+  ##////////////////////////////////////////////////////////////////////////////
+  if [ -s $tmptgz ]; then
+    printf "\n$SPL Doing decompress [$tmptgz] $SPL\n"
+    tar -zxf $tmptgz -C / && rm -f $tmptgz
+    local fk3s='/etc/profile.d/z90-k3s.sh'
+    {
+      echo 'if [ XZ != X$(command -v k3s)Z ]; then'
+      echo '  source <(k3s completion bash)'
+      echo 'fi 2>/dev/null'
+      echo 'if [ XZ != X$(command -v kubectl)Z ]; then'
+      echo '  source <(kubectl completion bash)'
+      echo 'fi 2>/dev/null'
+      echo 'if [ XZ != X$(command -v crictl)Z ]; then'
+      echo '  source <(crictl completion bash)'
+      echo 'fi 2>/dev/null'
+    } >$fk3s && printf "$SPL Create-[$fk3s] $SPL\n"
+  fi
+}
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+SPL='//////////////////////////////'
+[ X0Z != X${1:-0}Z ] && shf_untgzwkld
+shf_outter
+exit 0 #@#MARKER#@#

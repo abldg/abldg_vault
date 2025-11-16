@@ -1,0 +1,77 @@
+#LDG_REGEN_ENV#
+[ -z "$PS1" ] && return
+
+# do not put duplicate lines in the history.
+HISTCONTROL=ignoredups:ignorespace
+
+# append to the history file, do not overwrite it
+shopt -s histappend
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
+EDITOR=vi
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# loads-my-extensions
+sfldfuncs() {
+  ##load-shvars-and-shfuncs
+  local x= flst=
+  flst+=($(ls /etc/profile.d/z9*.sh 2>/dev/null))
+  flst+=($(ls $HOME/.myinit/[0-9]*.sh 2>/dev/null))
+  flst+=(/usr/share/bash-completion/bash_completion)
+  flst+=($HOME/.bash_aliases)
+  # flst+=($(ls $HOME/.config/mydev_* 2>/dev/null))
+  for x in ${flst[@]}; do [ -e $x ] && . $x; done 2>/dev/null
+  ##for-vscode-remote-cli
+  sfu.etcprofile
+  ##clean-path-duplications
+  sfu.tiny_path
+  ##
+  sft.chk_pkgcmd
+  ##for-petalinux-v2018.3
+  set -- $HOME/.swbase/plnx20183
+  [ -d $1 ] && export PLNXDIR="$1"
+}
+sfldfuncs && unset -f sfldfuncs
+##BGN_RUSTUP~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+if [ -d ${CARGOBINDIR:=$HOME/.cargo/bin} ]; then
+  case ":${PATH}:" in
+  *:"$CARGOBINDIR":*) ;;
+  *) export PATH="$CARGOBINDIR:$PATH" ;;
+  esac
+  ##load-completions
+  if [ XZ != X$(command -v rustup)Z ]; then
+    source <(rustup completions bash cargo)
+    source <(rustup completions bash rustup)
+  fi 2>/dev/null
+fi 2>/dev/null
+##END_RUSTUP~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+##BGN_GOLANG~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+if [ -d ${GOLANGDIR:=/usr/local/go} ]; then
+  export PATH="$GOLANGDIR/bin:$PATH"
+  export GOROOT="$GOLANGDIR"
+fi
+##END_GOLANG~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+##BGN_K3S~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+for x in helm k3s kubectl crictl; do
+  if [ X != X$(command -v $x) ]; then
+    source <($x completion bash)
+  fi 2>/dev/null
+done && unset -v x
+if [ X != X$(command -v k3s) ] && [ X != X$(command -v helm) ]; then
+  export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+fi
+##END_K3S~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+##BGN_UV~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[ X != X$(command -v uv) ] && source <(uv generate-shell-completion bash)
+##BGN_UV~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

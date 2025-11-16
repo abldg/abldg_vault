@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+## coding=utf-8
+##==================================----------==================================
+## FILE: usg1_init_exp_for_ubt.txt
+## MYPG: abldg, https://github.com/abldg
+## LSCT: 2025-07-21 09:27:52
+## VERS: 0.1
+##==================================----------==================================
+
+##init-for-ubuntu-vm-or-ct
+sed -i -r "s@//(archive|security)@//cn.archive@" /etc/apt/sources.list
+rm -rf /var/cache/apt /var/lib/apt/*; apt update -y; apt upgrade -y
+apt install -y curl git make gawk tar gzip

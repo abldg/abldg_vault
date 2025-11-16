@@ -1,0 +1,20 @@
+mirrors:
+  docker.io:
+    endpoint:
+    - "https://vgnxamtipjkx4a.xuanyuan.run"
+    - "https://docker.m.daocloud.io"
+
+  gcr.io:
+    endpoint:
+    - "https://vgnxamtipjkx4a-gcr.xuanyuan.run"
+    - "https://gcr.m.daocloud.io"
+
+  quay.io:
+    endpoint:
+    - "https://vgnxamtipjkx4a-quay.xuanyuan.run"
+    - "https://quay.m.daocloud.io"
+
+  registry.k8s.io:
+    endpoint:
+    - "https://vgnxamtipjkx4a-k8s.xuanyuan.run"
+    - "https://k8s.m.daocloud.io"

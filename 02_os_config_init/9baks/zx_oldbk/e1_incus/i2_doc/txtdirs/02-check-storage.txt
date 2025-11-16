@@ -1,0 +1,48 @@
+root@micro1:~# lxc storage list    <<<<<<--------------------
++-----------+--------+----------------------------------------------+---------+---------+
+|   NAME    | DRIVER |                 DESCRIPTION                  | USED BY |  STATE  |
++-----------+--------+----------------------------------------------+---------+---------+
+| local     | zfs    | Local storage on ZFS                         | 8       | CREATED |
++-----------+--------+----------------------------------------------+---------+---------+
+| remote    | ceph   | Distributed storage on Ceph                  | 1       | CREATED |
++-----------+--------+----------------------------------------------+---------+---------+
+| remote-fs | cephfs | Distributed file-system storage using CephFS | 0       | CREATED |
++-----------+--------+----------------------------------------------+---------+---------+
+ 
+root@micro1:~# lxc storage info local    <<<<<<--------------------
+info:
+  description: Local storage on ZFS
+  driver: zfs
+  name: local
+  space used: 862.50KiB
+  total space: 38.28GiB
+used by:
+  volumes:
+  - backups (location "micro1")
+  - backups (location "micro2")
+  - backups (location "micro3")
+  - backups (location "micro4")
+  - images (location "micro1")
+  - images (location "micro2")
+  - images (location "micro3")
+  - images (location "micro4")
+ 
+root@micro1:~# lxc storage info remote    <<<<<<--------------------
+info:
+  description: Distributed storage on Ceph
+  driver: ceph
+  name: remote
+  space used: 36.00KiB
+  total space: 47.47GiB
+used by:
+  profiles:
+  - default
+ 
+root@micro1:~# lxc storage info remote-fs    <<<<<<--------------------
+info:
+  description: Distributed file-system storage using CephFS
+  driver: cephfs
+  name: remote-fs
+  space used: 0B
+  total space: 47.47GiB
+used by: {}

@@ -1,0 +1,17 @@
+.vscode-server/
+*.tsksh
+ubt24_incus/
+*env.*
+# *.yaml
+testdir/
+output/
+*ocboot*
+*tmp*
+04_gist/*.tar.*
+cloudexplorer*/
+panel_*
+inst_*
+pkgsrc*
+deploy*/
+compose.yml
+.devcontainer.*

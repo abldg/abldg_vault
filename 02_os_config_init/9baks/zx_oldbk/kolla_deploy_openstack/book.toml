@@ -1,0 +1,5 @@
+[book]
+authors = ["abldg"]
+language = "cn"
+src = "src"
+title = "在Ubuntu24.04上使用Kolla-ansible部署Openstack(2024.1)"

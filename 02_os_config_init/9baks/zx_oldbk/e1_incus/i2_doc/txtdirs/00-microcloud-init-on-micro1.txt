@@ -1,0 +1,141 @@
+root@micro1:~#microcloud init    <<<<<<--------------------
+Do you want to set up more than one cluster member? (yes/no) [default=yes]: yes
+Select an address for MicroCloud's internal traffic:
+Space to select; enter to confirm; type to filter results.
+Up/down to move; right to select all; left to select none.
+       +----------------------+--------+
+       |       ADDRESS        | IFACE  |
+       +----------------------+--------+
+> [X]  | 203.0.113.169        | enp5s0 |
+  [ ]  | 2001:db8:d:100::169  | enp5s0 |
+       +----------------------+--------+
+ 
+ Using address "203.0.113.169" for MicroCloud
+ 
+Use the following command on systems that you want to join the cluster:
+ 
+ microcloud join
+ 
+When requested enter the passphrase:
+ 
+ koala absorbing update dorsal
+ 
+Verify the fingerprint "5d0808de679d" is displayed on joining systems.
+Waiting to detect systems ...
+Select the systems that should join the cluster:
+Space to select; enter to confirm; type to filter results.
+Up/down to move; right to select all; left to select none.
+       +---------+---------------+--------------+
+       |  NAME   |    ADDRESS    | FINGERPRINT  |
+       +---------+---------------+--------------+
+> [x]  | micro3  | 203.0.113.171 | 4e80954d6a64 |
+  [x]  | micro2  | 203.0.113.170 | 84e0b50e13b3 |
+  [x]  | micro4  | 203.0.113.172 | 98667a808a99 |
+       +---------+---------------+--------------+
+ 
+ Selected "micro1" at "203.0.113.169"
+ Selected "micro3" at "203.0.113.171"
+ Selected "micro2" at "203.0.113.170"
+ Selected "micro4" at "203.0.113.172"
+ 
+Would you like to set up local storage? (yes/no) [default=yes]: yes
+Select exactly one disk from each cluster member:
+Space to select; enter to confirm; type to filter results.
+Up/down to move; right to select all; left to select none.
+       +----------+---------------+----------+------+------------------------------------------------------+
+       | LOCATION |     MODEL     | CAPACITY | TYPE |                         PATH                         |
+       +----------+---------------+----------+------+------------------------------------------------------+
+  [x]  | micro1   | QEMU HARDDISK | 10.00GiB | scsi | /dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_lxd_local1  |
+  [ ]  | micro1   | QEMU HARDDISK | 20.00GiB | scsi | /dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_lxd_remote1 |
+  [x]  | micro2   | QEMU HARDDISK | 10.00GiB | scsi | /dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_lxd_local2  |
+  [ ]  | micro2   | QEMU HARDDISK | 20.00GiB | scsi | /dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_lxd_remote2 |
+  [x]  | micro3   | QEMU HARDDISK | 10.00GiB | scsi | /dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_lxd_local3  |
+  [ ]  | micro3   | QEMU HARDDISK | 20.00GiB | scsi | /dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_lxd_remote3 |
+> [x]  | micro4   | QEMU HARDDISK | 10.00GiB | scsi | /dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_lxd_local4  |
+       +----------+---------------+----------+------+------------------------------------------------------+
+ 
+Select which disks to wipe:
+Space to select; enter to confirm; type to filter results.
+Up/down to move; right to select all; left to select none.
+       +----------+---------------+----------+------+------------------------------------------------------+
+       | LOCATION |     MODEL     | CAPACITY | TYPE |                         PATH                         |
+       +----------+---------------+----------+------+------------------------------------------------------+
+> [ ]  | micro1   | QEMU HARDDISK | 10.00GiB | scsi | /dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_lxd_local1  |
+  [ ]  | micro2   | QEMU HARDDISK | 10.00GiB | scsi | /dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_lxd_local2  |
+  [ ]  | micro3   | QEMU HARDDISK | 10.00GiB | scsi | /dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_lxd_local3  |
+  [ ]  | micro4   | QEMU HARDDISK | 10.00GiB | scsi | /dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_lxd_local4  |
+       +----------+---------------+----------+------+------------------------------------------------------+
+ 
+ Using "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_lxd_local3" on "micro3" for local storage pool
+ Using "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_lxd_local4" on "micro4" for local storage pool
+ Using "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_lxd_local1" on "micro1" for local storage pool
+ Using "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_lxd_local2" on "micro2" for local storage pool
+ 
+Would you like to set up distributed storage? (yes/no) [default=yes]: yes
+Unable to find disks on some systems. Continue anyway? (yes/no) [default=yes]: yes
+Select from the available unpartitioned disks:
+Space to select; enter to confirm; type to filter results.
+Up/down to move; right to select all; left to select none.
+       +----------+---------------+----------+------+------------------------------------------------------+
+       | LOCATION |     MODEL     | CAPACITY | TYPE |                         PATH                         |
+       +----------+---------------+----------+------+------------------------------------------------------+
+> [x]  | micro1   | QEMU HARDDISK | 20.00GiB | scsi | /dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_lxd_remote1 |
+  [x]  | micro2   | QEMU HARDDISK | 20.00GiB | scsi | /dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_lxd_remote2 |
+  [x]  | micro3   | QEMU HARDDISK | 20.00GiB | scsi | /dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_lxd_remote3 |
+       +----------+---------------+----------+------+------------------------------------------------------+
+ 
+Select which disks to wipe:
+Space to select; enter to confirm; type to filter results.
+Up/down to move; right to select all; left to select none.
+       +----------+---------------+----------+------+------------------------------------------------------+
+       | LOCATION |     MODEL     | CAPACITY | TYPE |                         PATH                         |
+       +----------+---------------+----------+------+------------------------------------------------------+
+> [ ]  | micro1   | QEMU HARDDISK | 20.00GiB | scsi | /dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_lxd_remote1 |
+  [ ]  | micro2   | QEMU HARDDISK | 20.00GiB | scsi | /dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_lxd_remote2 |
+  [ ]  | micro3   | QEMU HARDDISK | 20.00GiB | scsi | /dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_lxd_remote3 |
+       +----------+---------------+----------+------+------------------------------------------------------+
+ 
+ Using 1 disk(s) on "micro1" for remote storage pool
+ Using 1 disk(s) on "micro2" for remote storage pool
+ Using 1 disk(s) on "micro3" for remote storage pool
+ 
+Do you want to encrypt the selected disks? (yes/no) [default=no]: no
+Would you like to set up CephFS remote storage? (yes/no) [default=yes]:  yes
+What subnet (either IPv4 or IPv6 CIDR notation) would you like your Ceph internal traffic on? [default: 203.0.113.0/24]:
+What subnet (either IPv4 or IPv6 CIDR notation) would you like your Ceph public traffic on? [default: 203.0.113.0/24]:
+Configure distributed networking? (yes/no) [default=yes]:  yes
+Select an available interface per system to provide external connectivity for distributed network(s):
+Space to select; enter to confirm; type to filter results.
+Up/down to move; right to select all; left to select none.
+       +----------+--------+----------+
+       | LOCATION | IFACE  |   TYPE   |
+       +----------+--------+----------+
+> [x]  | micro2   | enp6s0 | physical |
+  [x]  | micro3   | enp6s0 | physical |
+  [x]  | micro1   | enp6s0 | physical |
+  [x]  | micro4   | enp6s0 | physical |
+       +----------+--------+----------+
+ 
+ Using "enp6s0" on "micro3" for OVN uplink
+ Using "enp6s0" on "micro1" for OVN uplink
+ Using "enp6s0" on "micro2" for OVN uplink
+ Using "enp6s0" on "micro4" for OVN uplink
+ 
+Specify the IPv4 gateway (CIDR) on the uplink network (empty to skip IPv4): 192.0.2.1/24
+Specify the first IPv4 address in the range to use on the uplink network: 192.0.2.100
+Specify the last IPv4 address in the range to use on the uplink network: 192.0.2.254
+Specify the IPv6 gateway (CIDR) on the uplink network (empty to skip IPv6): 2001:db8:d:200::1/64
+Specify the DNS addresses (comma-separated IPv4 / IPv6 addresses) for the distributed network (default: 192.0.2.1,2001:db8:d:200::1):
+Configure dedicated underlay networking? (yes/no) [default=no]:
+ 
+Initializing a new cluster
+ Local MicroCloud is ready
+ Local LXD is ready
+ Local MicroOVN is ready
+ Local MicroCeph is ready
+Awaiting cluster formation ...
+ Peer "micro2" has joined the cluster
+ Peer "micro3" has joined the cluster
+ Peer "micro4" has joined the cluster
+Cluster initialization is complete
+MicroCloud is ready

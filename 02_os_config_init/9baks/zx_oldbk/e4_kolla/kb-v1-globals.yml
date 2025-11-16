@@ -1,0 +1,55 @@
+#bash -c 'cat >>/etc/kolla/globals.yml<<"EEE"
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# enable_cinder: "yes"
+# enable_cinder_backend_lvm: "yes"
+# cinder_volume_group: "cinder-volumes"
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+openstack_release: "'$vern'"
+kolla_base_distro: "ubuntu"
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+##docker-settings-for-CN
+docker_registry: "docker.xuanyuan.run"
+docker_registry_insecure: true
+docker_apt_url: "'$murl'"
+docker_registry_mirrors:
+  - "https:docker.xuanyuan.run"
+  - "https://quay.nju.edu.cn"
+  - "https://docker.1ms.run"
+  - "https://hub.geekery.cn"
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+docker_namespace: "kolla"
+enable_keystone: "yes"
+enable_glance: "yes"
+enable_nova: "yes"
+enable_neutron: "yes"
+enable_horizon: "yes"
+enable_haproxy: "no"
+enable_fluentd: "no"
+database_port: "3306"
+database_address: "'$cip4'"
+keystone_public_address: "'$cip4'"
+keystone_internal_address: "'$cip4'"
+keystone_admin_address: "'$cip4'"
+kolla_internal_vip_address: "'$cip4'"
+keystone_public_port: "5000"
+keystone_admin_port: "35357"
+kolla_network_cidr: "192.168.166.0/24"
+
+tunnel_interface: "eno1"
+network_interface: "eno1"
+neutron_external_interface: "eno2"
+neutron_plugin_agent: "openvswitch"
+enable_neutron_provider_networks: "yes"
+neutron_bridge_name: "br-ex"
+bridge_interface_mappings: "physnet1:br-ex"
+neutron_global_physnet_mtu: "1500"
+
+enable_nova_pci_passthrough: "yes"
+nova_compute_pci_passthrough_devices:
+  - vendor_id: "10de"
+    product_id: "2206"
+nova_pci_alias:
+  - name: "gpu"
+    vendor_id: "10de"
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#EEE'

@@ -1,0 +1,59 @@
+{
+  "accessibility.verbosity.inlineChat": false,
+  "accessibility.verbosity.panelChat": false,
+  "chat.agent.enabled": false,
+  "chat.commandCenter.enabled": false,
+  "chat.detectParticipant.enabled": false,
+  "chat.extensionTools.enabled": false,
+  "editor.guides.bracketPairs": "active",
+  "editor.guides.indentation": true,
+  "editor.minimap.enabled": false,
+  "editor.mouseWheelZoom": true,
+  "editor.tabSize": 4,
+  "editor.trimAutoWhitespace": false,
+  "editorconfig.generateAuto": false,
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "extensions.ignoreRecommendations": true,
+  "files.autoSave": "afterDelay",
+  "files.trimTrailingWhitespaceInRegexAndStrings": false,
+  "git.confirmSync": false,
+  "inlineChat.accessibleDiffView": "off",
+  "inlineChat.holdToSpeech": false,
+  "notebook.experimental.generate": false,
+  "npm.fetchOnlinePackageInfo": false,
+  "shellformat.path": "/usr/bin/shfmt",
+  "telemetry.feedback.enabled": false,
+  "typescript.disableAutomaticTypeAcquisition": true,
+  "terminal.integrated.stickyScroll.enabled": false,
+  "window.commandCenter": false,
+  "workbench.colorTheme": "Default Dark Modern",
+  "workbench.editor.enablePreview": false,
+  "workbench.settings.enableNaturalLanguageSearch": false,
+  "workbench.startupEditor": "none",
+  "workbench.editor.autoLockGroups": {
+    "workbench.editor.chatSession": false,
+    "mainThreadWebview-simpleBrowser.view": false
+  },
+  "editor.rulers": [
+    {
+      "column": 80,
+      "color": "#48693e"
+    },
+    {
+      "column": 100,
+      "color": "#ff2fc1"
+    },
+    {
+      "column": 120,
+      "color": "#ff7700"
+    }
+  ],
+  "chat.checkpoints.enabled": false,
+  "chat.agent.thinkingStyle": "none",
+  "editor.copyWithSyntaxHighlighting": false,
+  "dev.containers.copyGitConfig": false,
+  "chat.disableAIFeatures": true,
+  "workbench.settings.showAISearchToggle": false,
+  "microsoft-authentication.implementation": "classic"
+}

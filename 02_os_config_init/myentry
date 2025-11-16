@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+## coding=utf-8
+##==================================----------==================================
+## FILE: myentry
+## MYPG: abldg, https://github.com/abldg
+## LSCT: 2025-10-14 12:07:03
+## VERS: 1.0.0
+##==================================----------==================================
+##Uncommon functions~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+if [ X1 != X${SHV_CALL_BY_MAKE} ]; then
+  make_alldeps_ready() {
+    set -x
+    bash -c '[ -e /etc/os-release ] && source /etc/os-release
+    if [ X${ID_LIKE}Y${ID}Z == XdebianYubuntuZ ]; then
+      ## Ubuntu ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      MUSTC=https://mirrors.ustc.edu.cn/ubuntu
+      ALIST=/etc/apt/sources.list.d/ubuntu.sources
+      NPKGS="curl git make jq bash-completion tar gzip bzip2 gawk"
+      sed -i -r "s|//(archive|security)|//cn.archive|" /etc/apt/sources.list
+      sed -i -r "s|(^URIs:).*|\1 $MUSTC|" $ALIST
+      echo nameserver 114.114.114.114 >/etc/resolv.conf
+      apt-get update -y >/dev/null && apt-get install -y $NPKGS
+    else ## OpenEuler ##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      NPKGS="curl git make jq bash-completion tar gzip bzip2 gawk"
+      echo nameserver 114.114.114.114 >/etc/resolv.conf
+      yum update -y && yum install -y $NPKGS
+    fi #2>/dev/null' 2>/dev/null
+    set +x
+  }
+  unify_all_mods_shfile_version() {
+    local sexps= && set -- "${1##*v}"
+    [ X0 != X${#1} ] && sexps+=(-e 's|(^## VERS:).*|\1 '"$1"'|')
+    sexps+=(-e 's|(^## LSCT:).*|\1 '"$(date +'%F %T')"'|')
+    { sed -i -r "${sexps[@]}" $0 $(find -type f -name "*.sh"); } 2>/dev/null
+  }
+  actid=${1} && shift
+  case ${actid} in
+  univer) unify_all_mods_shfile_version ${1:-1.0.0} ;;
+  ready_deps) make_alldeps_ready ;;
+  esac
+  exit 0
+fi
+##frequently-used functions~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+hdlen=${#TASK_HANDLER}
+sclen=${#SHV_FULLPATH_COMMLIB}
+[ X0 = X${hdlen} ] && exit 10
+[ X0 = X${sclen} ] && exit 11
+{ source $SHV_FULLPATH_COMMLIB; } 2>/dev/null
+
+set -- $(declare -F $TASK_HANDLER) $@ && [ X${#1} = X$hdlen ] && $@
